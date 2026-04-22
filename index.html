@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#534AB7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Trainer">
+<title>Leadership Communication Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-alt: #f4f2ec;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --text-faint: #999;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.15);
+
+    --purple: #534AB7;
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+    --purple-dark: #26215C;
+
+    --teal: #0F6E56;
+    --teal-bg: #E1F5EE;
+    --teal-text: #085041;
+
+    --amber: #BA7517;
+    --amber-bg: #FAEEDA;
+    --amber-text: #633806;
+
+    --coral: #993C1D;
+    --coral-bg: #FAECE7;
+    --coral-text: #712B13;
+
+    --pink: #993556;
+    --pink-bg: #FBEAF0;
+    --pink-text: #72243E;
+
+    --blue: #185FA5;
+    --blue-bg: #E6F1FB;
+    --blue-text: #0C447C;
+
+    --good-bg: #E1F5EE;
+    --good-text: #085041;
+    --warn-bg: #FAEEDA;
+    --warn-text: #633806;
+    --danger-bg: #FCEBEB;
+    --danger-text: #791F1F;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141414;
+      --surface: #1f1f1f;
+      --surface-alt: #2a2a2a;
+      --text: #f0f0f0;
+      --text-muted: #a0a0a0;
+      --text-faint: #707070;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.18);
+
+      --purple-bg: #26215C;
+      --purple-text: #CECBF6;
+      --purple-dark: #3C3489;
+
+      --teal-bg: #085041;
+      --teal-text: #9FE1CB;
+
+      --amber-bg: #633806;
+      --amber-text: #FAC775;
+
+      --coral-bg: #712B13;
+      --coral-text: #F5C4B3;
+
+      --pink-bg: #72243E;
+      --pink-text: #F4C0D1;
+
+      --blue-bg: #0C447C;
+      --blue-text: #B5D4F4;
+
+      --good-bg: #085041;
+      --good-text: #9FE1CB;
+      --warn-bg: #633806;
+      --warn-text: #FAC775;
+      --danger-bg: #501313;
+      --danger-text: #F09595;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.5;
+  }
+  body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+
+  /* ============ WELCOME SCREEN ============ */
+  .welcome {
+    min-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .welcome-hero {
+    background: linear-gradient(135deg, var(--purple-bg), var(--teal-bg));
+    border-radius: var(--radius-xl);
+    padding: 40px 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .welcome-emoji { font-size: 44px; margin-bottom: 12px; display: block; }
+  .welcome-title { font-size: 26px; font-weight: 500; margin-bottom: 12px; color: var(--text); line-height: 1.25; }
+  .welcome-sub { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .welcome-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .welcome-feature {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+  }
+  .welcome-feature-num {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--purple-text);
+    margin-bottom: 4px;
+  }
+  .welcome-feature-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .welcome-cta {
+    width: 100%;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 500;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-family: inherit;
+    margin-bottom: 10px;
+  }
+  .welcome-skip {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* ============ TOUR MODAL ============ */
+  .tour-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  .tour-modal {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .tour-step-indicator {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .tour-dot {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-strong);
+  }
+  .tour-dot.active { background: var(--purple); }
+  .tour-dot.done { background: var(--purple); opacity: 0.4; }
+  .tour-icon {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .tour-title { font-size: 22px; font-weight: 500; margin-bottom: 10px; text-align: center; }
+  .tour-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .tour-body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .tour-body strong { color: var(--text); font-weight: 500; }
+  .tour-example {
+    background: var(--surface-alt);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 14px 0;
+    color: var(--text-muted);
+  }
+  .tour-example em { color: var(--text); font-style: normal; font-weight: 500; }
+  .tour-btns { display: flex; gap: 10px; }
+  .tour-btns button {
+    flex: 1;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .tour-btns button.primary { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+  /* ============ MAIN APP ============ */
+  .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .app-title { font-size: 20px; font-weight: 500; }
+  .app-streak {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--amber-bg);
+    color: var(--amber-text);
+    padding: 6px 12px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .tab-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 99px;
+    border: 0.5px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .tab.on { color: #fff; }
+  .tab[data-tab="0"].on { background: var(--purple); border-color: var(--purple); }
+  .tab[data-tab="1"].on { background: var(--amber); border-color: var(--amber); }
+  .tab[data-tab="2"].on { background: var(--teal); border-color: var(--teal); }
+  .tab[data-tab="3"].on { background: var(--blue); border-color: var(--blue); }
+  .tab[data-tab="4"].on { background: var(--coral); border-color: var(--coral); }
+  .tab[data-tab="5"].on { background: var(--pink); border-color: var(--pink); }
+  .tab[data-tab="6"].on { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+  /* Panel headers with colour identity */
+  .panel-header {
+    border-radius: var(--radius-xl);
+    padding: 22px 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-header[data-color="purple"] { background: var(--purple-bg); }
+  .panel-header[data-color="amber"] { background: var(--amber-bg); }
+  .panel-header[data-color="teal"] { background: var(--teal-bg); }
+  .panel-header[data-color="blue"] { background: var(--blue-bg); }
+  .panel-header[data-color="coral"] { background: var(--coral-bg); }
+  .panel-header[data-color="pink"] { background: var(--pink-bg); }
+  .panel-header-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .panel-header[data-color="purple"] .panel-header-tag { color: var(--purple-text); }
+  .panel-header[data-color="amber"] .panel-header-tag { color: var(--amber-text); }
+  .panel-header[data-color="teal"] .panel-header-tag { color: var(--teal-text); }
+  .panel-header[data-color="blue"] .panel-header-tag { color: var(--blue-text); }
+  .panel-header[data-color="coral"] .panel-header-tag { color: var(--coral-text); }
+  .panel-header[data-color="pink"] .panel-header-tag { color: var(--pink-text); }
+  .panel-header-title { font-size: 22px; font-weight: 500; margin-bottom: 6px; line-height: 1.25; }
+  .panel-header[data-color="purple"] .panel-header-title { color: var(--purple-text); }
+  .panel-header[data-color="amber"] .panel-header-title { color: var(--amber-text); }
+  .panel-header[data-color="teal"] .panel-header-title { color: var(--teal-text); }
+  .panel-header[data-color="blue"] .panel-header-title { color: var(--blue-text); }
+  .panel-header[data-color="coral"] .panel-header-title { color: var(--coral-text); }
+  .panel-header[data-color="pink"] .panel-header-title { color: var(--pink-text); }
+  .panel-header-sub { font-size: 14px; line-height: 1.5; opacity: 0.85; }
+  .panel-header[data-color="purple"] .panel-header-sub { color: var(--purple-text); }
+  .panel-header[data-color="amber"] .panel-header-sub { color: var(--amber-text); }
+  .panel-header[data-color="teal"] .panel-header-sub { color: var(--teal-text); }
+  .panel-header[data-color="blue"] .panel-header-sub { color: var(--blue-text); }
+  .panel-header[data-color="coral"] .panel-header-sub { color: var(--coral-text); }
+  .panel-header[data-color="pink"] .panel-header-sub { color: var(--pink-text); }
+  .help-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text);
+  }
+  @media (prefers-color-scheme: dark) {
+    .help-btn { background: rgba(0,0,0,0.3); color: var(--text); }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .scenario-box {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .scenario-hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  textarea, input[type=text] {
+    width: 100%;
+    min-height: 100px;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-strong);
+    background: var(--surface-alt);
+    color: var(--text);
+    font-family: inherit;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  textarea:focus, input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px var(--purple-bg); }
+
+  .live-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    padding: 0 4px;
+  }
+  .live-counter-val { font-weight: 500; }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  button {
+    font-size: 15px;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  button:active { transform: scale(0.98); }
+  button.primary {
+    background: var(--purple);
+    color: #fff;
+    border-color: var(--purple);
+    flex: 1;
+    min-width: 140px;
+  }
+  button.primary[data-color="amber"] { background: var(--amber); border-color: var(--amber); }
+  button.primary[data-color="teal"] { background: var(--teal); border-color: var(--teal); }
+  button.primary[data-color="blue"] { background: var(--blue); border-color: var(--blue); }
+  button.primary[data-color="coral"] { background: var(--coral); border-color: var(--coral); }
+  button.primary[data-color="pink"] { background: var(--pink); border-color: var(--pink); }
+
+  /* BLUF waffle meter — richer viz */
+  .meter-wrap {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .meter-cell {
+    background: var(--surface-alt);
+    border-radius: var(--radius-md);
+    padding: 14px 8px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .meter-cell.good { border-color: var(--teal); background: var(--teal-bg); }
+  .meter-cell.bad { border-color: var(--coral); background: var(--coral-bg); }
+  .meter-val {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .meter-cell.good .meter-val { color: var(--teal-text); }
+  .meter-cell.bad .meter-val { color: var(--coral-text); }
+  .meter-lbl {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+  .score-big {
+    text-align: center;
+    margin: 10px 0;
+  }
+  .score-big-num {
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .score-big-max { font-size: 20px; color: var(--text-muted); }
+  .score-big-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .fb-good, .fb-warn {
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .fb-good { background: var(--good-bg); color: var(--good-text); }
+  .fb-warn { background: var(--warn-bg); color: var(--warn-text); }
+
+  /* WORD tab visuals */
+  .word-display {
+    background: linear-gradient(135deg, var(--teal-bg), var(--purple-bg));
+    border-radius: var(--radius-xl);
+    padding: 28px 22px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .word-level-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .word-level-badge { background: rgba(0,0,0,0.3); }
+  }
+  .word-main {
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--teal-text);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .word-def {
+    font-size: 16px;
+    color: var(--teal-text);
+    opacity: 0.85;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .word-ex {
+    font-size: 14px;
+    color: var(--teal-text);
+    opacity: 0.8;
+    line-height: 1.5;
+    font-style: italic;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.4);
+    border-radius: var(--radius-md);
+    margin-top: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .word-ex { background: rgba(0,0,0,0.2); }
+  }
+
+  /* LISTEN tab */
+  .listen-display {
+    background: var(--blue-bg);
+    border-radius: var(--radius-xl);
+    padding: 28px 22px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .listen-label {
+    font-size: 11px;
+    color: var(--blue-text);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .listen-text {
+    font-size: 19px;
+    color: var(--blue-text);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* PRESSURE tab */
+  .pressure-display {
+    background: var(--coral-bg);
+    border-radius: var(--radius-xl);
+    padding: 24px 22px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .pressure-label {
+    font-size: 11px;
+    color: var(--coral-text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .pressure-text {
+    font-size: 18px;
+    color: var(--coral-text);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* REFRAME tab */
+  .waffle-display {
+    background: var(--amber-bg);
+    border-radius: var(--radius-xl);
+    padding: 22px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .waffle-label {
+    font-size: 11px;
+    color: var(--amber-text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .waffle-text {
+    font-size: 15px;
+    color: var(--amber-text);
+    line-height: 1.65;
+  }
+
+  /* PRESENCE tab */
+  .presence-step {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .presence-step-num {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--pink-bg);
+    color: var(--pink-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .presence-step-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    padding-right: 40px;
+  }
+  .presence-step-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  /* PROGRESS tab */
+  .progress-hero {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    border-radius: var(--radius-xl);
+    padding: 28px 22px;
+    margin-bottom: 16px;
+    color: #fff;
+    text-align: center;
+  }
+  .progress-hero-streak {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .progress-hero-label {
+    font-size: 14px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .progress-hero-sub {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 10px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .stat-trend {
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--teal);
+  }
+
+  /* Charts */
+  .chart-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .chart-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .chart-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .chart-svg { width: 100%; display: block; }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 10px;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+  }
+  .cal-cell.active { background: var(--teal); }
+  .cal-cell.today { border: 2px solid var(--purple); }
+  .cal-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .cal-label {
+    font-size: 10px;
+    color: var(--text-faint);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .word-library-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .lib-dot {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--surface-alt);
+    position: relative;
+  }
+  .lib-dot.lv1 { background: #c4beef; }
+  .lib-dot.lv2 { background: #9d95e4; }
+  .lib-dot.lv3 { background: #7b72d8; }
+  .lib-dot.lv4 { background: #5e53cc; }
+  .lib-dot.lv5 { background: var(--purple); }
+
+  .hidden { display: none !important; }
+
+  .empty-progress {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-muted);
+  }
+  .empty-progress-emoji { font-size: 32px; margin-bottom: 10px; display: block; }
+
+  strong { font-weight: 500; }
+  em { font-style: normal; font-weight: 500; color: var(--purple-text); }
+</style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN -->
+<div id="welcome" class="welcome">
+  <div class="welcome-hero">
+    <span class="welcome-emoji">★</span>
+    <div class="welcome-title">Learn to speak less.<br>Say more.</div>
+    <div class="welcome-sub">A 10-minute daily trainer. Six months from now, you'll command any room you walk into.</div>
+  </div>
+
+  <div class="welcome-features">
+    <div class="welcome-feature">
+      <div class="welcome-feature-num">6</div>
+      <div class="welcome-feature-label">drills per day, each targeting a specific leadership skill</div>
+    </div>
+    <div class="welcome-feature">
+      <div class="welcome-feature-num">73</div>
+      <div class="welcome-feature-label">leadership words with spaced repetition</div>
+    </div>
+    <div class="welcome-feature">
+      <div class="welcome-feature-num">5</div>
+      <div class="welcome-feature-label">waffle signals detected in real time as you type</div>
+    </div>
+    <div class="welcome-feature">
+      <div class="welcome-feature-num">180</div>
+      <div class="welcome-feature-label">days of reps to transform your communication</div>
+    </div>
+  </div>
+
+  <button class="welcome-cta" onclick="startTour()">Start tour →</button>
+  <button class="welcome-skip" onclick="skipToApp()">Skip tour — I'll figure it out</button>
+</div>
+
+<!-- TOUR OVERLAY -->
+<div id="tour" class="tour-overlay hidden">
+  <div class="tour-modal" id="tour-modal"></div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+  <div class="app-header">
+    <div class="app-title">Communication trainer</div>
+    <div class="app-streak" id="streak-pill">◆ <span id="streak-val">0</span>-day streak</div>
+  </div>
+
+  <nav class="tab-bar" id="tab-bar">
+    <button class="tab on" data-tab="0">BLUF</button>
+    <button class="tab" data-tab="1">Reframe</button>
+    <button class="tab" data-tab="2">Word</button>
+    <button class="tab" data-tab="3">Listen</button>
+    <button class="tab" data-tab="4">Pressure</button>
+    <button class="tab" data-tab="5">Presence</button>
+    <button class="tab" data-tab="6">Progress</button>
+  </nav>
+
+  <section id="panel-0">
+    <div class="panel-header" data-color="purple">
+      <button class="help-btn" onclick="replayTour(0)">?</button>
+      <div class="panel-header-tag">Drill 1 · 2 min</div>
+      <div class="panel-header-title">Answer first. Explain second.</div>
+      <div class="panel-header-sub">Leaders lead with the conclusion. You're about to practise the structure senior executives use.</div>
+    </div>
+    <div class="card">
+      <div class="label">Today's question</div>
+      <div class="scenario-box" id="bluf-prompt">Loading...</div>
+      <div class="scenario-hint">Rule: conclusion in sentence 1 → why in sentence 2 → stop.</div>
+      <textarea id="bluf-ans" placeholder="Type your answer as if you were saying it out loud..." oninput="liveCountBluf()"></textarea>
+      <div class="live-counter">
+        <span>Target: under 30 words, no hedged start</span>
+        <span class="live-counter-val" id="bluf-live">0 words</span>
+      </div>
+      <div class="btn-row">
+        <button class="primary" data-color="purple" onclick="analyseBluf()">Check my answer</button>
+        <button onclick="nextBluf()">Skip · next</button>
+      </div>
+      <div id="bluf-meter"></div>
+      <div id="bluf-fb"></div>
+    </div>
+  </section>
+
+  <section id="panel-1" class="hidden">
+    <div class="panel-header" data-color="amber">
+      <button class="help-btn" onclick="replayTour(1)">?</button>
+      <div class="panel-header-tag">Drill 2 · 2 min</div>
+      <div class="panel-header-title">Cut the waffle. Add the "so what".</div>
+      <div class="panel-header-sub">Read a waffled paragraph. Compress it. Then add the implication — that's the leadership layer.</div>
+    </div>
+    <div class="waffle-display">
+      <div class="waffle-label">Someone said this...</div>
+      <div class="waffle-text" id="waffle-text">Loading...</div>
+    </div>
+    <div class="card">
+      <div class="label">Your sharp version + implication</div>
+      <textarea id="reframe-ans" placeholder="Sentence 1: the facts. Sentence 2: what we should do." oninput="liveCountReframe()"></textarea>
+      <div class="live-counter">
+        <span>Target: under 30 words, includes action word</span>
+        <span class="live-counter-val" id="reframe-live">0 words</span>
+      </div>
+      <div class="btn-row">
+        <button class="primary" data-color="amber" onclick="analyseReframe()">Check</button>
+        <button onclick="nextWaffle()">New example</button>
+      </div>
+      <div id="reframe-fb"></div>
+    </div>
+  </section>
+
+  <section id="panel-2" class="hidden">
+    <div class="panel-header" data-color="teal">
+      <button class="help-btn" onclick="replayTour(2)">?</button>
+      <div class="panel-header-tag">Drill 3 · 2 min</div>
+      <div class="panel-header-title">One word a day. Built to stick.</div>
+      <div class="panel-header-sub">New words come back for review — 1, 3, 7, 14, 30, then 90 days. That's how vocabulary moves from "I've heard it" to "I use it".</div>
+    </div>
+    <div class="word-display">
+      <span class="word-level-badge" id="word-badge">New word</span>
+      <div class="word-main" id="word-main">Loading...</div>
+      <div class="word-def" id="word-def"></div>
+      <div class="word-ex" id="word-ex"></div>
+    </div>
+    <div class="card">
+      <div class="label">Use it in a sentence about your real life</div>
+      <textarea id="word-ans" placeholder="Write about something actually going on for you. That's what locks it in."></textarea>
+      <div class="btn-row">
+        <button class="primary" data-color="teal" onclick="analyseWord()">Lock it in</button>
+        <button onclick="nextWord()">Skip</button>
+        <button onclick="showReview()">My library</button>
+      </div>
+      <div id="word-fb"></div>
+      <div id="word-review" class="hidden"></div>
+    </div>
+  </section>
+
+  <section id="panel-3" class="hidden">
+    <div class="panel-header" data-color="blue">
+      <button class="help-btn" onclick="replayTour(3)">?</button>
+      <div class="panel-header-tag">Drill 4 · into your day</div>
+      <div class="panel-header-title">The most powerful leadership skill.</div>
+      <div class="panel-header-sub">One question to ask in a real conversation today. Come back later and log what you learned.</div>
+    </div>
+    <div class="listen-display">
+      <div class="listen-label">Today's listening challenge</div>
+      <div class="listen-text" id="listen-prompt">Loading...</div>
+    </div>
+    <div class="card">
+      <div class="label">After the conversation: what did you learn?</div>
+      <textarea id="listen-ans" placeholder="Come back here once you've done it. Write what you heard that surprised you."></textarea>
+      <div class="btn-row">
+        <button class="primary" data-color="blue" onclick="logListen()">Log it</button>
+        <button onclick="nextListen()">Different question</button>
+      </div>
+      <div id="listen-fb"></div>
+    </div>
+  </section>
+
+  <section id="panel-4" class="hidden">
+    <div class="panel-header" data-color="coral">
+      <button class="help-btn" onclick="replayTour(4)">?</button>
+      <div class="panel-header-tag">Drill 5 · 1 min</div>
+      <div class="panel-header-title">Composure under fire.</div>
+      <div class="panel-header-sub">Real leadership moments happen when you're challenged or caught off-guard. Practise short and steady here.</div>
+    </div>
+    <div class="pressure-display">
+      <div class="pressure-label">You're in a meeting. Someone says...</div>
+      <div class="pressure-text" id="pressure-prompt">Loading...</div>
+    </div>
+    <div class="card">
+      <div class="label">Your response — measured, not defensive</div>
+      <textarea id="pressure-ans" placeholder="Pause. Then answer short and steady. Under 40 words."></textarea>
+      <div class="btn-row">
+        <button class="primary" data-color="coral" onclick="analysePressure()">Check</button>
+        <button onclick="nextPressure()">New scenario</button>
+      </div>
+      <div id="pressure-fb"></div>
+    </div>
+  </section>
+
+  <section id="panel-5" class="hidden">
+    <div class="panel-header" data-color="pink">
+      <button class="help-btn" onclick="replayTour(5)">?</button>
+      <div class="panel-header-tag">Drill 6 · 1 min before a meeting</div>
+      <div class="panel-header-title">Lock in presence before you walk in.</div>
+      <div class="panel-header-sub">Three questions. Answer them before your next important meeting and watch what happens.</div>
+    </div>
+    <div class="presence-step">
+      <span class="presence-step-num">1</span>
+      <div class="presence-step-label">The one message I'm leaving them with</div>
+      <div class="presence-step-hint">If they forget everything else, they remember this.</div>
+      <textarea id="p-1" placeholder="One sentence. No preamble." style="min-height: 70px;"></textarea>
+    </div>
+    <div class="presence-step">
+      <span class="presence-step-num">2</span>
+      <div class="presence-step-label">A sharp question I'll ask before I give my view</div>
+      <div class="presence-step-hint">Ask before you tell. Learn before you lead.</div>
+      <textarea id="p-2" placeholder="A question that reframes the discussion." style="min-height: 70px;"></textarea>
+    </div>
+    <div class="presence-step">
+      <span class="presence-step-num">3</span>
+      <div class="presence-step-label">My physical cue — one thing to adjust</div>
+      <div class="presence-step-hint">Pick one: slower pace, longer pauses, steadier posture, lower voice.</div>
+      <textarea id="p-3" placeholder="Just one. You'll forget three." style="min-height: 70px;"></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="primary" data-color="pink" onclick="savePrep()">Lock it in</button>
+      <button onclick="clearPrep()">Clear</button>
+    </div>
+    <div id="prep-saved" class="hidden"></div>
+  </section>
+
+  <section id="panel-6" class="hidden">
+    <div class="progress-hero">
+      <div class="progress-hero-streak" id="progress-streak">0</div>
+      <div class="progress-hero-label">day streak</div>
+      <div class="progress-hero-sub" id="progress-msg">Start today. Come back tomorrow.</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-reps">0</div>
+        <div class="stat-label">total reps</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-words">0</div>
+        <div class="stat-label">words learned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-listen">0</div>
+        <div class="stat-label">listening reps</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-bluf-avg">–</div>
+        <div class="stat-label">BLUF avg score</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Your BLUF score over time</div>
+      <div class="chart-sub">Higher is better. 5/5 = leadership-grade.</div>
+      <div id="bluf-chart"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Daily practice — last 35 days</div>
+      <div class="chart-sub">Each square is a day. Green = practised.</div>
+      <div class="cal-labels">
+        <div class="cal-label">M</div><div class="cal-label">T</div><div class="cal-label">W</div><div class="cal-label">T</div><div class="cal-label">F</div><div class="cal-label">S</div><div class="cal-label">S</div>
+      </div>
+      <div class="calendar-grid" id="calendar"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Your word library</div>
+      <div class="chart-sub">Each dot is a word. Darker = more mastered (review level 1–5).</div>
+      <div class="word-library-grid" id="word-library"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Manage your data</div>
+      <div class="btn-row">
+        <button onclick="exportData()">Export progress</button>
+        <button onclick="resetAll()">Reset everything</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="trainer.js"></script>
+</body>
+</html>
